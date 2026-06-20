@@ -16,7 +16,7 @@ export default function App() {
     const handleTimingPress=() =>{
         timingX.value= timingX.value === 0 
         ? withTiming(150, {duration: 1000, easing:Easing.bounce})
-        : withTiming(0,{ duration:1000, easing:Easing.bounce})
+        : withTiming(0,{ duration:1000, easing:Easing.inOut(Easing.ease)})
     }
 
     const handleSpringPress=() => {
