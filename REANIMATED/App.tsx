@@ -3,10 +3,11 @@ import React from "react";
 import ThreadJammer from "./src/demos/ThreadJammer";
 import CustomizedAnimationDemo from "./src/demos/CustomizedAnimationDemo";
 import ApplyingModifiersDemo from "@/demos/ApplyingModifiersDemo";
+import PanGestureBox from "./src/demos/PanGestureBox";
 // import BoxMover from "./src/demos/BoxMover";
 // import AnimatedCircle from "./src/demos/AnimatedCircle";
 
 export default function App() {
   // Return the active component here
-  return <ApplyingModifiersDemo />;
+  return <PanGestureBox />;
 }
