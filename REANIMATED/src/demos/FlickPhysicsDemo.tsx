@@ -18,6 +18,10 @@ export default function Flick() {
     const offset = useSharedValue(0)
     const width = useSharedValue(0)
 
+    const onLayout=(event: LayoutChangeEvent) => {
+        width.value=event.nativeEvent.layout.width
+    }
+
     const pan = Gesture.Pan()
         .onChange((event) => {
             offset.value += event.changeX
@@ -38,9 +42,11 @@ export default function Flick() {
     }))
     return (
         <GestureHandlerRootView style={styles.container}>
+            <View style={styles.wrapper} onLayout={onLayout}>
             <GestureDetector gesture={pan}>
                 <Animated.View style={[styles.box, animatedStyles]} />
             </GestureDetector>
+            </View>
         </GestureHandlerRootView >
     )
 }
