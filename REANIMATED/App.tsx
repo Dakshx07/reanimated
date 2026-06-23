@@ -3,10 +3,11 @@ import React from "react";
 import TapCircle from "./src/demos/tapCircle";
 import Flick from "./src/demos/FlickPhysicsDemo";
 import LayoutAnimationDemo from "./src/demos/LayoutAnimationDemo";
+import ParallaxScroll from "./src/demos/ParallaxScrollDemo";
 // import BoxMover from "./src/demos/BoxMover";
 // import AnimatedCircle from "./src/demos/AnimatedCircle";
 
 export default function App() {
   // Return the F component here
-  return <LayoutAnimationDemo />;
+  return <ParallaxScroll />;
 }
