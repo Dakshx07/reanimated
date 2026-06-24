@@ -62,7 +62,25 @@ Verification method (tests/lint/build): ____________________
 Escalation trigger: ____________________
 ```
 
-## 6. Quality Gate Before Calling Anything "Done"
+## 6. Token & Quota Efficiency Rules
+
+These rules exist to stop runaway token usage — a stuck agent retrying the same failing action repeatedly is the #1 cause of exhausted quota.
+
+1. **Hard retry cap on identical errors.** If the same error appears 2x in a row from the same action, STOP retrying that action. Either change approach or escalate — never try the exact same thing a 3rd time.
+2. **Read before you re-read.** Don't re-view a whole file you already have in context unless it changed. Re-fetch only what's needed (specific line ranges, diffs) instead of whole files.
+3. **One pass of context, not many.** Gather all the info needed for a step in as few tool calls as possible, instead of trickling in one small read at a time.
+4. **Concise outputs by default.** Agent responses/logs during the loop should be short status lines ("edited X, ran tests, 2 failed") not long restatements of the plan or the file contents already shown.
+5. **No redundant verification.** Run tests/lint once per meaningful change, not after every micro-edit. Batch small related edits, then verify once.
+6. **Budget checkpoint.** At 50% and 80% of the step/token budget, briefly assess: "is this converging?" If not, stop and report instead of burning the rest of the budget on the same failing path.
+7. **Escalate early on ambiguity.** One clarifying question costs far fewer tokens than several wrong-guess iterations. If genuinely blocked, ask once instead of guessing repeatedly.
+8. **Summarize, don't dump.** When reporting results (success or failure), give a short summary + the relevant diff/error — not the entire file or entire log.
+
+### Quick Self-Check Before Each New Action
+- "Have I tried this exact action+error combo before?" -> if yes, change approach instead of repeating
+- "Do I already have this information in context?" -> if yes, don't re-fetch it
+- "Can I batch this with the next obvious step?" -> if yes, do both before verifying
+
+## 7. Quality Gate Before Calling Anything "Done"
 
 - [ ] Tests pass (not just "ran without crashing")
 - [ ] Lint/type-check clean
