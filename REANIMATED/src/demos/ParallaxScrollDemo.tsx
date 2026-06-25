@@ -23,7 +23,7 @@ export default function ParallaxScroll(){
   const headerAnimatedStye=useAnimatedStyle(() => {
     const scale=scrollY.value< 0 ? 1 - scrollY.value / HEADER_HEIGHT : 1;
 
-    const tranlateY=scrollY.value>0 ? scrollY.value / 2 :0;
+    const tranlateY=scrollY.value>0 ? - scrollY.value / 2 :0;
 
     return {
     transform:[
