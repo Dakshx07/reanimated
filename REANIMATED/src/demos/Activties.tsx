@@ -9,6 +9,8 @@ import Animated, {
     withTiming,
     withDelay,
     Easing,
+    interpolate,      
+    Extrapolation, 
 } from 'react-native-reanimated';
 
 const { height, width } = Dimensions.get('window')
@@ -16,51 +18,89 @@ const { height, width } = Dimensions.get('window')
 const AnimatedPath = Animated.createAnimatedComponent(Path)
 
 export default function Activities() {
-    const yellowEntry = useSharedValue(0)
-    const pinkEntry = useSharedValue(0)
-    const blueEntry = useSharedValue(0)
+    const masterClock=useSharedValue(0)
 
     const notchRotation = useSharedValue(0)
 
     useEffect(() => {
+        notchRotation.value=0
         notchRotation.value = withRepeat(
             withTiming(360, { duration: 2000, easing: Easing.linear }),
             -1,
             false
         )
 
-        yellowEntry.value = withDelay(100, withSpring(1, { damping: 12, stiffness: 70 }))
-        pinkEntry.value = withDelay(300, withSpring(1, { damping: 10, stiffness: 60 }))
-        blueEntry.value = withDelay(500, withSpring(1, { damping: 14, stiffness: 80 }))
+       masterClock.value=0
+       masterClock.value=withRepeat(
+        withTiming(1, {duration:7000, easing: Easing.linear}),
+        -1,
+    false,
+       )
     }, [])
 
     const yellowStyle = useAnimatedStyle(() => {
-        const translateY = (1 - yellowEntry.value) * 600
+        const translateY=interpolate(
+            masterClock.value,
+            [0.0,0.2,0.75,0.95],
+            [600,0,0-600],
+            Extrapolation.CLAMP
+        )
+        const opacity = interpolate(
+            masterClock.value,
+            [0.0, 0.15, 0.8, 0.95],
+            [0, 1, 1, 0],
+            Extrapolation.CLAMP
+        );
+
         return {
-            transform: [
-                { translateY },
-                { rotate: '-18deg' }
+            opacity,
+            transform:[
+                {translateY},
+                {rotate:'-18deg'}
             ]
         }
     })
 
     const pinkStyle = useAnimatedStyle(() => {
-        const tranlateY = (1 - pinkEntry.value) * 600
+        const translateY = interpolate(
+            masterClock.value,
+            [0.05, 0.25, 0.8, 1.0],
+            [600, 0, 0, -600],
+            Extrapolation.CLAMP
+        );
+        const opacity = interpolate(
+            masterClock.value,
+            [0.05, 0.2, 0.85, 1.0],
+            [0, 1, 1, 0],
+            Extrapolation.CLAMP
+        );
         return {
+            opacity,
             transform: [
-                { translateX: tranlateY },
+                { translateY },
                 { rotate: '12deg' }
             ]
-        }
+        };
     })
     const blueStyle = useAnimatedStyle(() => {
-        const tranlateY = (1 - blueEntry.value) * 600
+        const translateY = interpolate(
+            masterClock.value,
+            [0.1, 0.3, 0.8, 1.0],
+            [600, 0, 0, -600],
+            Extrapolation.CLAMP
+        );
+        const opacity = interpolate(
+            masterClock.value,
+            [0.1, 0.25, 0.85, 1.0],
+            [0, 1, 1, 0],
+            Extrapolation.CLAMP
+        );
         return {
+            opacity,
             transform: [
-                { translateX: tranlateY },
-                { rotate: '12deg' }
+                { translateY }
             ]
-        }
+        };
     })
 
     const notchStyle = useAnimatedStyle(() => ({
