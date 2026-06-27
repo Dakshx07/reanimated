@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     startButton:{
         position: 'absolute',
         bottom:60,
-        right:40,
+        right:20,
         backgroundColor: '#000000',
         borderRadius:30,
         paddingVertical:16,
