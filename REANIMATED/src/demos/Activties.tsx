@@ -32,7 +32,7 @@ export default function Activities() {
 
        masterClock.value=0
        masterClock.value=withRepeat(
-        withTiming(1, {duration:7000, easing: Easing.linear}),
+        withTiming(1, {duration:4000, easing: Easing.linear}),
         -1,
     false,
        )
@@ -42,7 +42,7 @@ export default function Activities() {
         const translateY=interpolate(
             masterClock.value,
             [0.0,0.2,0.75,0.95],
-            [600,0,0-600],
+            [600,0,0,-600],
             Extrapolation.CLAMP
         )
         const opacity = interpolate(
