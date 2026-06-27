@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
+    color:'gray'
   },
   divider: {
     borderRightWidth: 1,
@@ -78,8 +79,9 @@ const styles = StyleSheet.create({
   },
   animatedBorder: {
     height: 8,
-    width: 64,
-    backgroundColor: 'var(--swm-purple-dark-100)',
+    width: 72,
+    backgroundColor: '#b58df1',
+
     borderRadius: 20,
   },
 });
