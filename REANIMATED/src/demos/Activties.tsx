@@ -126,7 +126,21 @@ export default function Activities() {
                 <Animated.View style={[styles.blueCard, blueStyle]}>
                     <Text style={styles.cardTitle}>Charity event</Text>
           <Text style={styles.cardDate}>10/05/24</Text>
+
+          
                 </Animated.View>
+
+                <View style={styles.promptContainer}>
+            <Text style={styles.promptText}>Have you</Text>
+          <Text style={styles.promptText}>picked</Text>
+          <Text style={styles.promptText}>your next</Text>
+          <Text style={styles.promptText}>event?</Text>
+          </View>
+
+          <TouchableOpacity style={styles.startButton}>
+            <Text style={styles.startButtonText}>Start →</Text>
+
+          </TouchableOpacity>
             </View>
 
         </View>
@@ -237,6 +251,37 @@ const styles = StyleSheet.create({
         color: '#555555',
         marginTop: 4,
         fontWeight: '500',
+    },
+    promptContainer:{
+        position:'absolute',
+        bottom:150,
+        right:40,
+        alignItems: 'flex-start',
+    },
+    promptText:{
+        fontSize:18,
+        fontWeight:'500',
+        color: '#555555',
+    lineHeight: 22,
+    },
+    startButton:{
+        position: 'absolute',
+        bottom:60,
+        right:40,
+        backgroundColor: '#000000',
+        borderRadius:30,
+        paddingVertical:16,
+         paddingHorizontal: 36,
+         shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 4,
+    },
+    startButtonText:{
+        color: '#fff',
+    fontSize: 18,
+    fontWeight: '600',
+    letterSpacing: 0.5,
     }
 
 
