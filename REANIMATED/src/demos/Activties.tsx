@@ -179,10 +179,8 @@ export default function Activities() {
 
           <TouchableOpacity style={styles.startButton}>
             <Text style={styles.startButtonText}>Start →</Text>
-
           </TouchableOpacity>
             </View>
-
         </View>
 
     )
